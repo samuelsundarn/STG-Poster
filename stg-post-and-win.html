@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Post &amp; Win · STG on Station H</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --indigo:#3a25c9; --violet:#7a2bc4; --pink:#e83f78; --orange:#f5793a;
+    --amber:#fdbb2d; --teal:#12c3b3; --ink:#140f3a; --white:#ffffff;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *,*::before,*::after{box-sizing:inherit}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--ink)}
+  body{
+    margin:0;min-height:100%;color:var(--white);
+    font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    background:linear-gradient(155deg,#2f22b8 0%,#6a26c2 38%,#c4318f 72%,#f5793a 100%) fixed;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:460px;margin:0 auto;padding:28px 20px 40px;position:relative}
+  .hexbg{position:fixed;inset:0;pointer-events:none;opacity:.14;z-index:0}
+  .wrap>*{position:relative;z-index:1}
+
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;opacity:.9}
+  .badge{width:44px;height:50px;flex:none}
+
+  h1{font-weight:900;font-size:clamp(44px,13vw,60px);line-height:.95;margin:26px 0 10px;letter-spacing:-.02em}
+  h1 span{display:block}
+  h1 .y{color:var(--amber);text-shadow:3px 3px 0 #b5305d}
+  .lede{font-size:16px;line-height:1.5;margin:0 0 26px;max-width:34ch;opacity:.95}
+
+  .prize{
+    display:flex;gap:14px;align-items:center;background:var(--amber);color:var(--ink);
+    border-radius:18px;padding:14px 16px;margin-bottom:28px;box-shadow:0 8px 0 #b5305d;
+  }
+  .prize svg{flex:none}
+  .prize b{display:block;font-size:17px;font-weight:800;line-height:1.2}
+  .prize small{font-size:13px;line-height:1.35;display:block;margin-top:2px}
+
+  .step{background:rgba(20,15,58,.55);border:1px solid rgba(255,255,255,.14);border-radius:22px;padding:18px;margin-bottom:14px;backdrop-filter:blur(6px)}
+  .step h2{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;margin:0 0 14px}
+  .num{width:28px;height:32px;flex:none;display:grid;place-items:center;font-size:14px;font-weight:900;color:var(--ink);
+       background:var(--amber);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+
+  .tags{display:flex;flex-direction:column;gap:10px}
+  .tag{
+    appearance:none;border:0;cursor:pointer;width:100%;display:flex;justify-content:space-between;align-items:center;
+    font:800 17px/1 "Poppins",system-ui,sans-serif;border-radius:999px;padding:15px 18px;color:var(--ink);
+    transition:transform .12s ease;
+  }
+  .tag:active{transform:scale(.98)}
+  .tag .act{font-size:12px;font-weight:600;background:rgba(20,15,58,.15);padding:6px 10px;border-radius:999px}
+  .t1{background:var(--pink);color:#fff}.t1 .act{background:rgba(255,255,255,.22)}
+  .t2{background:var(--teal)}
+  .t3{background:var(--amber)}
+  .tag.done .act{background:var(--ink);color:#fff}
+
+  .all{appearance:none;cursor:pointer;width:100%;margin-top:12px;padding:15px;border-radius:16px;
+       border:2px dashed rgba(255,255,255,.55);background:transparent;color:#fff;font:700 15px "Poppins",system-ui,sans-serif}
+  .all.done{border-style:solid;border-color:var(--amber);color:var(--amber)}
+
+  .go{display:flex;justify-content:center;align-items:center;gap:10px;text-decoration:none;
+      background:#fff;color:var(--indigo);font-weight:800;font-size:18px;padding:17px;border-radius:16px;box-shadow:0 6px 0 var(--ink)}
+  .url{display:block;text-align:center;font-size:12px;opacity:.75;margin-top:10px;word-break:break-all}
+
+  .how{margin:0;padding-left:0;list-style:none;font-size:15px;line-height:1.5}
+  .how li{display:flex;gap:10px;margin-bottom:8px}
+  .how li::before{content:"";width:8px;height:8px;margin-top:8px;flex:none;background:var(--teal);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+
+  footer{text-align:center;margin-top:26px;font-size:13px;opacity:.8}
+  .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,40px);opacity:0;
+         background:var(--ink);color:#fff;padding:12px 18px;border-radius:999px;font-weight:600;font-size:14px;transition:all .25s ease;z-index:5}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+  :focus-visible{outline:3px solid #fff;outline-offset:3px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg class="hexbg" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <g fill="none" stroke="#fff" stroke-width="1.5">
+    <polygon points="80,60 150,100 150,180 80,220 10,180 10,100"/>
+    <polygon points="320,180 400,226 400,318 320,364 240,318 240,226"/>
+    <polygon points="120,420 210,472 210,576 120,628 30,576 30,472"/>
+    <polygon points="330,620 380,649 380,707 330,736 280,707 280,649"/>
+  </g>
+</svg>
+
+<main class="wrap">
+  <div class="brand">
+    <svg class="badge" viewBox="0 0 44 50" aria-hidden="true"><polygon points="22,2 42,13.5 42,36.5 22,48 2,36.5 2,13.5" fill="#3a25c9" stroke="#fdbb2d" stroke-width="2.5"/><text x="22" y="30" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="800" font-size="12" fill="#fff">STG</text></svg>
+    Systems Technology Group · Hexaware
+  </div>
+
+  <h1><span>Snap it.</span><span>Tag it.</span><span class="y">Win it.</span></h1>
+  <p class="lede">Post your photo on Station H with all three hashtags. That's it.</p>
+
+  <div class="prize" role="note">
+    <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="16" width="30" height="20" rx="3" fill="#e83f78"/><rect x="3" y="11" width="34" height="8" rx="2" fill="#3a25c9"/><rect x="17.5" y="11" width="5" height="25" fill="#fdbb2d"/><path d="M20 11c-3-7-11-6-9-1 1 2 5 1 9 1zm0 0c3-7 11-6 9-1-1 2-5 1-9 1z" fill="#fdbb2d" stroke="#140f3a" stroke-width="1.2"/></svg>
+    <div><b>Most likes wins a Surprise Goodie</b><small>The post with the highest likes takes it home.</small></div>
+  </div>
+
+  <section class="step" aria-labelledby="s1">
+    <h2 id="s1"><span class="num">1</span>Copy the hashtags</h2>
+    <div class="tags">
+      <button class="tag t1" data-copy="#ThankYouKeech"><span>#ThankYouKeech</span><span class="act">Copy</span></button>
+      <button class="tag t2" data-copy="#ILoveStg"><span>#ILoveStg</span><span class="act">Copy</span></button>
+      <button class="tag t3" data-copy="#DoingMoreWithLess"><span>#DoingMoreWithLess</span><span class="act">Copy</span></button>
+    </div>
+    <button class="all" id="copyAll" data-copy="#ThankYouKeech #ILoveStg #DoingMoreWithLess">Copy all three</button>
+  </section>
+
+  <section class="step" aria-labelledby="s2">
+    <h2 id="s2"><span class="num">2</span>Open Station H</h2>
+    <a class="go" href="https://station-h.hexaware.com/" target="_blank" rel="noopener">Open Station H</a>
+    <span class="url">station-h.hexaware.com</span>
+  </section>
+
+  <section class="step" aria-labelledby="s3">
+    <h2 id="s3"><span class="num">3</span>Post your photo</h2>
+    <ul class="how">
+      <li>Create a new post and add your photo.</li>
+      <li>Paste the hashtags into the caption.</li>
+      <li>Share it and rally your team for likes.</li>
+    </ul>
+  </section>
+
+  <footer>#ThankYouKeech &nbsp; #ILoveStg &nbsp; #DoingMoreWithLess</footer>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  var toast=document.getElementById('toast'),t;
+  function show(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(t);t=setTimeout(function(){toast.classList.remove('show')},1600);}
+  function fallback(text){
+    var ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');
+    ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
+    var ok=false;try{ok=document.execCommand('copy')}catch(e){}
+    document.body.removeChild(ta);return ok;
+  }
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext){
+      return navigator.clipboard.writeText(text).then(function(){return true},function(){return fallback(text)});
+    }
+    return Promise.resolve(fallback(text));
+  }
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var text=btn.getAttribute('data-copy');
+      copy(text).then(function(ok){
+        if(!ok){show('Long-press the hashtag to copy it');return;}
+        btn.classList.add('done');
+        var act=btn.querySelector('.act');
+        if(act)act.textContent='Copied';
+        else btn.textContent='All three copied';
+        show(btn.id==='copyAll'?'All three hashtags copied':text+' copied');
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
