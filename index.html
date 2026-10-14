@@ -3,82 +3,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Post &amp; Win · STG on Station H</title>
+<title>Run to the STG Booth! · Post &amp; Win</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --indigo:#3a25c9; --violet:#7a2bc4; --pink:#e83f78; --orange:#f5793a;
-    --amber:#fdbb2d; --teal:#12c3b3; --ink:#140f3a; --white:#ffffff;
+    --indigo:#3a25c9; --pink:#e83f78; --orange:#f5793a; --amber:#fdbb2d;
+    --teal:#12c3b3; --ink:#140f3a; --white:#fff;
     box-sizing:border-box;
     padding-top:env(safe-area-inset-top,0px);
     padding-bottom:env(safe-area-inset-bottom,0px);
   }
   *,*::before,*::after{box-sizing:inherit}
   html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--ink)}
-  body{
-    margin:0;min-height:100%;color:var(--white);
+  body{margin:0;min-height:100%;color:var(--white);
     font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-    background:linear-gradient(155deg,#2f22b8 0%,#6a26c2 38%,#c4318f 72%,#f5793a 100%) fixed;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:460px;margin:0 auto;padding:28px 20px 40px;position:relative}
+    background:linear-gradient(155deg,#2f22b8 0%,#6a26c2 38%,#c4318f 72%,#f5793a 100%);background-attachment:scroll;min-height:100vh;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
   .hexbg{position:fixed;inset:0;pointer-events:none;opacity:.14;z-index:0}
-  .wrap>*{position:relative;z-index:1}
+  .wrap{max-width:460px;margin:0 auto;padding:22px 20px 40px;position:relative;z-index:1}
 
-  .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;opacity:.9}
-  .badge{width:44px;height:50px;flex:none}
+  .brand{display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:600;font-size:13px}
+  .brand .l{display:flex;align-items:center;gap:10px}
+  .live{display:inline-flex;align-items:center;gap:8px;background:var(--ink);padding:7px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.06em}
+  .live i{width:9px;height:9px;border-radius:50%;background:#ff4d6d;animation:blink 1s infinite}
+  @keyframes blink{50%{opacity:.25}}
 
-  h1{font-weight:900;font-size:clamp(44px,13vw,60px);line-height:.95;margin:26px 0 10px;letter-spacing:-.02em}
-  h1 span{display:block}
-  h1 .y{color:var(--amber);text-shadow:3px 3px 0 #b5305d}
-  .lede{font-size:16px;line-height:1.5;margin:0 0 26px;max-width:34ch;opacity:.95}
+  .kicker{margin:26px 0 0;display:inline-block;background:var(--amber);color:var(--ink);font-weight:900;font-size:13px;letter-spacing:.14em;padding:6px 12px;border-radius:8px;transform:rotate(-2deg)}
+  h1{font-weight:900;font-size:clamp(46px,14vw,64px);line-height:.92;margin:14px 0 12px;letter-spacing:-.02em}
+  h1 .y{color:var(--amber);text-shadow:3px 3px 0 #b5305d;display:inline-block;animation:bounce 1.6s ease-in-out infinite}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .lede{font-size:17px;line-height:1.5;margin:0 0 22px}
+  .lede b{color:var(--amber)}
 
-  .prize{
-    display:flex;gap:14px;align-items:center;background:var(--amber);color:var(--ink);
-    border-radius:18px;padding:14px 16px;margin-bottom:28px;box-shadow:0 8px 0 #b5305d;
-  }
-  .prize svg{flex:none}
-  .prize b{display:block;font-size:17px;font-weight:800;line-height:1.2}
-  .prize small{font-size:13px;line-height:1.35;display:block;margin-top:2px}
+  .prize{position:relative;overflow:hidden;background:var(--amber);color:var(--ink);border-radius:22px;padding:18px;margin-bottom:24px;box-shadow:0 8px 0 #b5305d;display:flex;gap:14px;align-items:center}
+  .prize::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);animation:shine 2.6s infinite}
+  @keyframes shine{to{left:130%}}
+  .gift{flex:none;animation:wiggle 2s ease-in-out infinite;transform-origin:50% 90%}
+  @keyframes wiggle{0%,70%,100%{transform:rotate(0)}75%{transform:rotate(-10deg)}85%{transform:rotate(10deg)}92%{transform:rotate(-5deg)}}
+  .prize small{display:block;font-size:13px;font-weight:600;letter-spacing:.04em}
+  .prize b{display:block;font-size:24px;font-weight:900;line-height:1.1}
+  .prize span{display:block;font-size:13px;margin-top:4px;line-height:1.35}
 
-  .step{background:rgba(20,15,58,.55);border:1px solid rgba(255,255,255,.14);border-radius:22px;padding:18px;margin-bottom:14px;backdrop-filter:blur(6px)}
-  .step h2{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;margin:0 0 14px}
-  .num{width:28px;height:32px;flex:none;display:grid;place-items:center;font-size:14px;font-weight:900;color:var(--ink);
+  .card{background:rgba(20,15,58,.55);border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:18px;margin-bottom:16px;backdrop-filter:blur(6px)}
+  .card h2{margin:0 0 14px;font-size:18px;font-weight:800}
+
+  .race{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+  .race li{display:flex;gap:14px;align-items:center}
+  .ico{width:52px;height:58px;flex:none;display:grid;place-items:center;font-size:24px;
        background:var(--amber);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+  .race li:nth-child(2) .ico{background:var(--pink)}
+  .race li:nth-child(3) .ico{background:var(--teal)}
+  .race li:nth-child(4) .ico{background:#fff}
+  .race b{display:block;font-size:16px;font-weight:800}
+  .race p{margin:2px 0 0;font-size:14px;line-height:1.35;opacity:.9}
 
-  .tags{display:flex;flex-direction:column;gap:10px}
-  .tag{
-    appearance:none;border:0;cursor:pointer;width:100%;display:flex;justify-content:space-between;align-items:center;
-    font:800 17px/1 "Poppins",system-ui,sans-serif;border-radius:999px;padding:15px 18px;color:var(--ink);
-    transition:transform .12s ease;
-  }
-  .tag:active{transform:scale(.98)}
-  .tag .act{font-size:12px;font-weight:600;background:rgba(20,15,58,.15);padding:6px 10px;border-radius:999px}
-  .t1{background:var(--pink);color:#fff}.t1 .act{background:rgba(255,255,255,.22)}
-  .t2{background:var(--teal)}
-  .t3{background:var(--amber)}
-  .tag.done .act{background:var(--ink);color:#fff}
+  .tagbox{background:#fff;color:var(--ink);border-radius:18px;padding:16px;display:flex;flex-wrap:wrap;gap:8px;user-select:all;-webkit-user-select:all}
+  .tagbox span{font-weight:800;font-size:15px;padding:6px 11px;border-radius:999px}
+  .t1{background:var(--pink);color:#fff}.t2{background:var(--teal)}.t3{background:var(--amber)}.t4{background:var(--indigo);color:#fff}
+  .btn{appearance:none;border:0;cursor:pointer;width:100%;display:flex;justify-content:center;align-items:center;gap:10px;
+       text-decoration:none;font:800 18px "Poppins",system-ui,sans-serif;padding:17px;border-radius:16px;margin-top:14px;transition:transform .1s}
+  .btn:active{transform:translateY(3px)}
+  .copy{background:var(--amber);color:var(--ink);box-shadow:0 6px 0 #b5305d;animation:pulse 1.8s infinite}
+  .copy.done{background:var(--teal);animation:none}
+  @keyframes pulse{0%,100%{box-shadow:0 6px 0 #b5305d,0 0 0 0 rgba(253,187,45,.6)}60%{box-shadow:0 6px 0 #b5305d,0 0 0 14px rgba(253,187,45,0)}}
+  .go{background:#fff;color:var(--indigo);box-shadow:0 6px 0 var(--ink)}
+  .li{background:#0a66c2;color:#fff;font-size:16px;white-space:nowrap;box-shadow:0 6px 0 var(--ink)}
+  .or{text-align:center;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:.7;margin:20px 0 -4px}
+  .where{margin:-4px 0 14px;font-size:14px;font-weight:600;opacity:.9}
+  .near{display:block;font-size:12px;font-weight:600;opacity:.8}
+  .topr{display:flex;gap:8px;align-items:center}
+  .mini{appearance:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:6px;background:#0a66c2;color:#fff;
+        font:800 12px "Poppins",system-ui,sans-serif;letter-spacing:.04em;padding:6px 12px 6px 7px;border-radius:999px;box-shadow:0 3px 0 var(--ink)}
+  .hint{display:block;text-align:center;font-size:12px;opacity:.75;margin-top:10px}
 
-  .all{appearance:none;cursor:pointer;width:100%;margin-top:12px;padding:15px;border-radius:16px;
-       border:2px dashed rgba(255,255,255,.55);background:transparent;color:#fff;font:700 15px "Poppins",system-ui,sans-serif}
-  .all.done{border-style:solid;border-color:var(--amber);color:var(--amber)}
+  .urgent{text-align:center;font-weight:800;font-size:15px;line-height:1.45;margin:22px 0 4px}
+  .urgent span{color:var(--amber)}
+  footer{text-align:center;margin-top:18px;font-size:12px;opacity:.75}
 
-  .go{display:flex;justify-content:center;align-items:center;gap:10px;text-decoration:none;
-      background:#fff;color:var(--indigo);font-weight:800;font-size:18px;padding:17px;border-radius:16px;box-shadow:0 6px 0 var(--ink)}
-  .url{display:block;text-align:center;font-size:12px;opacity:.75;margin-top:10px;word-break:break-all}
-
-  .how{margin:0;padding-left:0;list-style:none;font-size:15px;line-height:1.5}
-  .how li{display:flex;gap:10px;margin-bottom:8px}
-  .how li::before{content:"";width:8px;height:8px;margin-top:8px;flex:none;background:var(--teal);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
-
-  footer{text-align:center;margin-top:26px;font-size:13px;opacity:.8}
   .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,40px);opacity:0;
-         background:var(--ink);color:#fff;padding:12px 18px;border-radius:999px;font-weight:600;font-size:14px;transition:all .25s ease;z-index:5}
+    background:var(--ink);color:#fff;padding:12px 18px;border-radius:999px;font-weight:600;font-size:14px;transition:all .25s;z-index:5;white-space:nowrap}
   .toast.show{opacity:1;transform:translate(-50%,0)}
+  #confetti{position:fixed;inset:0;pointer-events:none;z-index:4}
   :focus-visible{outline:3px solid #fff;outline-offset:3px}
-  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -90,79 +99,106 @@
     <polygon points="330,620 380,649 380,707 330,736 280,707 280,649"/>
   </g>
 </svg>
+<canvas id="confetti"></canvas>
 
 <main class="wrap">
   <div class="brand">
-    <svg class="badge" viewBox="0 0 44 50" aria-hidden="true"><polygon points="22,2 42,13.5 42,36.5 22,48 2,36.5 2,13.5" fill="#3a25c9" stroke="#fdbb2d" stroke-width="2.5"/><text x="22" y="30" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="800" font-size="12" fill="#fff">STG</text></svg>
-    Systems Technology Group · Hexaware
+    <div class="l">
+      <svg width="40" height="46" viewBox="0 0 44 50" aria-hidden="true"><polygon points="22,2 42,13.5 42,36.5 22,48 2,36.5 2,13.5" fill="#3a25c9" stroke="#fdbb2d" stroke-width="2.5"/><text x="22" y="30" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="800" font-size="12" fill="#fff">STG</text></svg>
+      STG · Hexaware
+    </div>
+    <div class="topr"><span class="live"><i></i>LIVE</span><button class="mini" id="topLinkedIn" aria-label="Copy hashtags and open LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#fff"/><path d="M6.9 9.5h2.6V18H6.9zM8.2 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zM11 9.5h2.5v1.2c.4-.7 1.3-1.4 2.6-1.4 2.8 0 3.3 1.8 3.3 4.2V18h-2.6v-4c0-1 0-2.2-1.4-2.2s-1.6 1-1.6 2.1V18H11z" fill="#0a66c2"/></svg>Post</button></div>
   </div>
 
-  <h1><span>Snap it.</span><span>Tag it.</span><span class="y">Win it.</span></h1>
-  <p class="lede">Post your photo on Station H with all three hashtags. That's it.</p>
+  <div class="kicker">🏃 DON'T WAIT!</div>
+  <h1>Run to the <span class="y">STG booth!</span></h1>
+  <p class="where">📍 (next to HexaCafe)</p>
+  <p class="lede">Strike a pose, snap a photo and get it on <b>LinkedIn &amp; Station H</b> fast. The sooner you post, the more likes you can collect!</p>
 
   <div class="prize" role="note">
-    <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="16" width="30" height="20" rx="3" fill="#e83f78"/><rect x="3" y="11" width="34" height="8" rx="2" fill="#3a25c9"/><rect x="17.5" y="11" width="5" height="25" fill="#fdbb2d"/><path d="M20 11c-3-7-11-6-9-1 1 2 5 1 9 1zm0 0c3-7 11-6 9-1-1 2-5 1-9 1z" fill="#fdbb2d" stroke="#140f3a" stroke-width="1.2"/></svg>
-    <div><b>Most likes wins a Surprise Goodie</b><small>The post with the highest likes takes it home.</small></div>
+    <svg class="gift" width="56" height="56" viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="16" width="30" height="20" rx="3" fill="#e83f78"/><rect x="3" y="11" width="34" height="8" rx="2" fill="#3a25c9"/><rect x="17.5" y="11" width="5" height="25" fill="#fff"/><path d="M20 11c-3-7-11-6-9-1 1 2 5 1 9 1zm0 0c3-7 11-6 9-1-1 2-5 1-9 1z" fill="#fff" stroke="#140f3a" stroke-width="1.2"/></svg>
+    <div><small>MOST LIKES WINS</small><b>A Surprise Goodie!</b><span>The post with the highest likes takes it home. Will it be yours?</span></div>
   </div>
 
-  <section class="step" aria-labelledby="s1">
-    <h2 id="s1"><span class="num">1</span>Copy the hashtags</h2>
-    <div class="tags">
-      <button class="tag t1" data-copy="#ThankYouKeech"><span>#ThankYouKeech</span><span class="act"></span></button>
-      <button class="tag t2" data-copy="#ILoveStg"><span>#ILoveStg</span><span class="act"></span></button>
-      <button class="tag t3" data-copy="#DoingMoreWithLess"><span>#DoingMoreWithLess</span><span class="act"></span></button>
+  <section class="card" aria-labelledby="race">
+    <h2 id="race">Your race to the goodie</h2>
+    <ol class="race">
+      <li><div class="ico" aria-hidden="true">🏃</div><div><b>Run to the STG booth <small class="near">(next to HexaCafe)</small></b><p>Find the STG cell and grab your spot.</p></div></li>
+      <li><div class="ico" aria-hidden="true">📸</div><div><b>Snap your best photo</b><p>Selfie, team shot, silly pose. Make it fun!</p></div></li>
+      <li><div class="ico" aria-hidden="true">🚀</div><div><b>Upload it ASAP</b><p>Post on LinkedIn &amp; Station H with the hashtags below.</p></div></li>
+      <li><div class="ico" aria-hidden="true">❤️</div><div><b>Rally the likes</b><p>Ask your team to like it. Every like counts!</p></div></li>
+    </ol>
+  </section>
+
+  <section class="card" aria-labelledby="tags">
+    <h2 id="tags">Add these hashtags to your post</h2>
+    <div class="tagbox" id="tagbox">
+      <span class="t1">#ThankYouKeech</span>
+      <span class="t2">#ILoveStg</span>
+      <span class="t3">#DoingMoreWithLess</span>
+      <span class="t4">#Hexaware</span>
     </div>
-    <button class="all" id="copyAll" data-copy="#ThankYouKeech #ILoveStg #DoingMoreWithLess">Copy all three</button>
+    <button class="btn copy" id="copyBtn">Copy hashtags</button>
+    <button class="btn li" id="openLinkedIn">
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#fff"/><path d="M6.9 9.5h2.6V18H6.9zM8.2 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zM11 9.5h2.5v1.2c.4-.7 1.3-1.4 2.6-1.4 2.8 0 3.3 1.8 3.3 4.2V18h-2.6v-4c0-1 0-2.2-1.4-2.2s-1.6 1-1.6 2.1V18H11z" fill="#0a66c2"/></svg>
+      Copy hashtags &amp; open LinkedIn
+    </button>
+    <span class="hint">Hashtags are copied for you. If they're not in the post, long-press and paste, add your photo, then tap Post.</span>
+    <div class="or">and also post on</div>
+    <a class="btn go" href="https://station-h.hexaware.com/" target="_blank" rel="noopener">Open Station H &amp; post now →</a>
+    <span class="hint">station-h.hexaware.com · paste the hashtags into your caption</span>
   </section>
 
-  <section class="step" aria-labelledby="s2">
-    <h2 id="s2"><span class="num">2</span>Open Station H</h2>
-    <a class="go" href="https://station-h.hexaware.com/" target="_blank" rel="noopener">Open Station H</a>
-    <span class="url">station-h.hexaware.com</span>
-  </section>
-
-  <section class="step" aria-labelledby="s3">
-    <h2 id="s3"><span class="num">3</span>Post your photo</h2>
-    <ul class="how">
-      <li>Create a new post and add your photo.</li>
-      <li>Paste the hashtags into the caption.</li>
-      <li>Share it and rally your team for likes.</li>
-    </ul>
-  </section>
-
-  <footer>#ThankYouKeech &nbsp; #ILoveStg &nbsp; #DoingMoreWithLess</footer>
+  <p class="urgent">Every minute counts. ⏱️<br><span>Post early, collect more likes, win the goodie!</span></p>
+  <footer>Systems Technology Group • Hexaware · Doing More With Less</footer>
 </main>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (function(){
-  var toast=document.getElementById('toast'),t;
-  function show(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(t);t=setTimeout(function(){toast.classList.remove('show')},1600);}
-  function fallback(text){
-    var ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');
-    ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
-    var ok=false;try{ok=document.execCommand('copy')}catch(e){}
-    document.body.removeChild(ta);return ok;
+  var TAGS='#ThankYouKeech #ILoveStg #DoingMoreWithLess #Hexaware';
+  var toast=document.getElementById('toast'),tm;
+  function show(m){toast.textContent=m;toast.classList.add('show');clearTimeout(tm);tm=setTimeout(function(){toast.classList.remove('show')},1800)}
+  function fallback(t){var a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.position='fixed';a.style.opacity='0';
+    document.body.appendChild(a);a.select();a.setSelectionRange(0,t.length);var ok=false;try{ok=document.execCommand('copy')}catch(e){}document.body.removeChild(a);return ok}
+  function copy(t){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t).then(function(){return true},function(){return fallback(t)});
+    return Promise.resolve(fallback(t));
   }
-  function copy(text){
-    if(navigator.clipboard&&window.isSecureContext){
-      return navigator.clipboard.writeText(text).then(function(){return true},function(){return fallback(text)});
-    }
-    return Promise.resolve(fallback(text));
-  }
-  document.querySelectorAll('[data-copy]').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var text=btn.getAttribute('data-copy');
-      copy(text).then(function(ok){
-        if(!ok){show('Long-press the hashtag to copy it');return;}
-        btn.classList.add('done');
-        var act=btn.querySelector('.act');
-        if(act)act.textContent='Copied';
-        else btn.textContent='All three copied';
-        show(btn.id==='copyAll'?'All three hashtags copied':text+' copied');
-      });
+  var btn=document.getElementById('copyBtn');
+  btn.addEventListener('click',function(){
+    copy(TAGS).then(function(ok){
+      if(!ok){show('Long-press the hashtags to copy');return}
+      btn.classList.add('done');btn.textContent='✓ Hashtags copied!';
+      show('Copied! Now open Station H and post 🚀');burst();
     });
   });
+
+  function openLI(){
+    fallback(TAGS)||(navigator.clipboard&&navigator.clipboard.writeText(TAGS).catch(function(){}));
+    show('Hashtags copied! Opening LinkedIn…');
+    var url='https://www.linkedin.com/feed/?shareActive=true&text='+encodeURIComponent(TAGS);
+    setTimeout(function(){window.location.href=url},400);
+  }
+  document.getElementById('openLinkedIn').addEventListener('click',openLI);
+  document.getElementById('topLinkedIn').addEventListener('click',openLI);
+
+  // confetti burst on copy
+  var c=document.getElementById('confetti'),g=c.getContext('2d'),parts=[],raf;
+  function size(){c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devicePixelRatio;g.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0)}
+  size();addEventListener('resize',size);
+  function burst(){
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    var r=btn.getBoundingClientRect(),cols=['#fdbb2d','#e83f78','#12c3b3','#fff','#f5793a'];
+    for(var i=0;i<90;i++)parts.push({x:r.left+r.width/2,y:r.top,vx:(Math.random()-.5)*12,vy:-Math.random()*12-4,s:4+Math.random()*6,c:cols[i%5],a:Math.random()*6,life:90});
+    cancelAnimationFrame(raf);tick();
+  }
+  function tick(){
+    g.clearRect(0,0,innerWidth,innerHeight);
+    parts=parts.filter(function(p){return p.life-->0});
+    parts.forEach(function(p){p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.a+=.2;g.save();g.translate(p.x,p.y);g.rotate(p.a);g.fillStyle=p.c;g.globalAlpha=Math.min(1,p.life/30);g.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);g.restore()});
+    if(parts.length)raf=requestAnimationFrame(tick);
+  }
 })();
 </script>
 </body>
